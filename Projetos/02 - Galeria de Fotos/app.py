@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import pandas as pd
 
 st.set_page_config(
     page_title="Galeria de imagens",
@@ -9,23 +10,39 @@ st.set_page_config(
 
 st.title("Galeria de imagens")
 
-lista_de_imagens = os.listdir("img")
+if os.path.exists('./data/imagens.csv'):
+    df = pd.read_csv('./data/imagens.csv')
 
-for i in range(round(len(lista_de_imagens) / 3)):
+
+# for j in range(len(df)):
+#     st.image(os.path.join("img", df["Nome do arquivo"][j]))
+#     st.caption(df['Nome da imagem'][j])
+
+
+for i in range(round(len(df) / 3)):
     col1, col2, col3 = st.columns(3)
     count = 1
-    for imagem in lista_de_imagens:
-        if imagem:
-            if count == 1:
-                col1.image(os.path.join("img", lista_de_imagens[i]))
-                count += 1
-                continue
-            if count == 2:
-                col2.image(os.path.join("img", lista_de_imagens[i + 1]))
-                count += 1
-                continue
-            if count == 3:
-                col3.image(os.path.join("img", lista_de_imagens[i + 2]))
-                count = 1
-                continue
-                
+    for j in range(len(df)):
+        if count == 1:
+            with col1:
+                with st.container(border=True):
+                    st.image(os.path.join("img", df["Nome do arquivo"][j]))
+                    st.caption(df['Nome da imagem'][j])
+                    count += 1
+                    continue
+        if count == 2:
+            with col2:
+                with st.container(border=True):
+                    st.image(os.path.join("img", df["Nome do arquivo"][j]))
+                    st.caption(df['Nome da imagem'][j])
+                    count += 1
+                    continue
+        if count == 3:
+            with col3:
+                with st.container(border=True):
+                    st.image(os.path.join("img", df["Nome do arquivo"][j]))
+                    st.caption(df['Nome da imagem'][j])
+                    count = 1
+                    continue
+
+
