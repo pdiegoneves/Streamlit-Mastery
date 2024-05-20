@@ -41,7 +41,7 @@ with st.expander("Como adicionar gráficos em um aplicativo Streamlit?"):
 
 st.divider()
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
     with st.container(border=True):    
@@ -52,8 +52,3 @@ with col2:
     with st.container(border=True):
         st.markdown("###### Autor")
         st.text("Diego Neves")
-
-with col3:
-    with st.container(border=True):
-        st.markdown("###### Co-Autor")
-        st.caption("Chat GPT 3.5")
