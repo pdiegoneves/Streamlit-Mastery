@@ -12,21 +12,33 @@ st.title("Dashboard")
 
 container = st.container(border=True)
 
-
 with container:
     df = pd.read_excel("./data/vendas.xlsx")
-    # st.dataframe(df)
     acumulado_vendas_por_cidade = df[['City', 'Total']].groupby('City').sum()
     media_vendas_por_cidade = df[[  'City', 'Total']].groupby('City').mean()
     
     quantidade_de_vendas = df.shape[0]
+    media_de_vendas = df['Total'].mean()
+    quantidade_vendida = df['Quantity'].sum()
 
-    st.write(df)
+    # st.write(df.describe())
 
     col1, col2, col3 = st.columns(3)
-    col1.metric(label="Quantidade de vendas", value=quantidade_de_vendas)
 
-    st.write(quantidade_de_vendas)
+    with col1:
+        content = st.container(border=True)
+        with content:
+            st.metric(label="Quantidade de vendas", value=quantidade_de_vendas)
+
+    with col2:
+        content = st.container(border=True)
+        with content:
+            st.metric(label="Média de vendas", value=media_de_vendas)
+    
+    with col3:
+        content = st.container(border=True)
+        with content:
+            st.metric(label="Quantidade vendida", value=quantidade_vendida)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -41,5 +53,5 @@ with container:
     st.bar_chart(preco_por_tipo_de_pagamento)
 
     quantidade_vendidas_por_genero_e_tipo = df[['Gender', 'Customer type', 'Quantity']].groupby(['Gender', 'Customer type']).sum()
-    st.write(quantidade_vendidas_por_genero_e_tipo)
+    # st.write(quantidade_vendidas_por_genero_e_tipo)
     # st.bar_chart(quantidade_vendidas_por_genero_e_tipo, x='Customer type', y='Quantity')
