@@ -56,5 +56,3 @@ with container:
     st.bar_chart(preco_por_tipo_de_pagamento)
 
     quantidade_vendidas_por_genero_e_tipo = df[['Gender', 'Customer type', 'Quantity']].groupby(['Gender', 'Customer type']).sum()
-    # st.write(quantidade_vendidas_por_genero_e_tipo)
-    # st.bar_chart(quantidade_vendidas_por_genero_e_tipo, x='Customer type', y='Quantity')
